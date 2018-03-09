@@ -51,7 +51,7 @@ wire[7:0] write_ptr,read_ptr;
 reg[7:0] diff_out;
 always @(*)
 		begin
-		if(write_ptr>read_ptr)
+		if(write_ptr>=read_ptr)
 		diff_out <= write_ptr-read_ptr;
 		else 
 		diff_out <= (256-read_ptr) + write_ptr;
@@ -63,7 +63,7 @@ reg[7:0] in1,in2;
 wire[7:0] out;
 pointer_diff d(in1,in2,out);
 initial begin
-$monitor("%d",out);
+$monitor($time,"%d",out);
 #5 in1 = 0;in2 = 0;
 #5 in1 = 1; in2 = 2;
 #5 in2 = 2; in1 = 1;
